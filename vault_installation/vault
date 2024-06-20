@@ -1,0 +1,50 @@
+Vault Integration Guide
+Step 1: Install Vault
+
+Download Vault from https://developer.hashicorp.com/vault/install.
+Extract the binary and move it to a directory in your PATH.
+Verify installation: vault --version.
+Step 2: Start Vault Server
+
+Initialize and start the Vault server in development mode for testing:
+
+vault server -dev
+Note the root token displayed in the terminal (used for initial setup).
+Step 3: Set Up Vault Environment
+
+Set the environment variable to communicate with Vault:
+
+export VAULT_ADDR='http://127.0.0.1:8200'
+Authenticate with the root token:
+
+vault login <root_token>
+Step 4: Enable Secrets Engine
+
+Enable a secrets engine (e.g., key/value store):
+
+vault secrets enable -path=secret kv
+Step 5: Store and Retrieve Secrets
+
+Store a secret:
+
+vault kv put secret/my-secret my-value=s3cr3t
+Retrieve a secret:
+
+vault kv get secret/my-secret
+Step 6: Configure Vault for Your Application
+
+Create policies to control access:
+
+vault policy write my-policy - <<EOF
+path "secret/*" {
+  capabilities = ["create", "read", "update", "delete", "list"]
+}
+EOF
+Create a token with the policy:
+vault token create -policy="my-policy"
+  
+Use the token in your application to authenticate and access Vault.
+Step 7: Integrate Vault with Your Application
+
+Add Vault client libraries to your application.
+Use the token to authenticate and retrieve secrets programmatically.
