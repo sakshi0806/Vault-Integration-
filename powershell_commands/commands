@@ -1,0 +1,12 @@
+These are few important commands we need to use on powershell or terminal after starting the virtual environment 
+
+1) cd "c:\vault...... give path of yuor vault.exe file after successful installation
+
+  
+2) .\vault.exe version    (command is used to check vault version)
+
+
+3) .\vault server-help    (gives necessary information about vault)
+
+
+4) .\vault server-dev     (gives all information about server and vault is unsealed)
